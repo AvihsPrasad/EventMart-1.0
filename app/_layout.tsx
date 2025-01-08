@@ -2,11 +2,13 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } f rom 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
+import React from 'react';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -27,13 +29,45 @@ export default function RootLayout() {
     return null;
   }
 
+  const MyStatusBar = ({backgroundColor, ...props}) => (
+    <View style={[styles.statusBar, { backgroundColor }]}>
+      <SafeAreaView>
+        <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+      </SafeAreaView>
+    </View>
+  );
+
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <>
+      { Platform.OS !== 'ios' && <StatusBar barStyle="light-content" backgroundColor={'#A4243B'}/>}
+      { Platform.OS === 'ios' && <MyStatusBar backgroundColor="#A4243B" barStyle="light-content" />}
       <Stack>
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(public)" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+      {/* <StatusBar style="auto" /> */}
+    </>
   );
 }
+
+const STATUSBAR_HEIGHT = StatusBar.currentHeight;
+// const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  statusBar: {
+    height: STATUSBAR_HEIGHT,
+  },
+  // appBar: {
+  //   backgroundColor:'#79B45D',
+  //   height: APPBAR_HEIGHT,
+  // },
+  content: {
+    flex: 1,
+    backgroundColor: '#33373B',
+  },
+});
