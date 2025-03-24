@@ -9,9 +9,12 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Platform, SafeAreaView, StatusBar, StyleSheet, View } from 'react-native';
 import React from 'react';
+import { ClerkLoaded, ClerkProvider } from "@clerk/clerk-expo";
+import tokenCache from '@/app/cache'
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -29,7 +32,7 @@ export default function RootLayout() {
     return null;
   }
 
-  const MyStatusBar = ({backgroundColor, ...props}) => (
+  const MyStatusBar = ({ backgroundColor = '', ...props }) => (
     <View style={[styles.statusBar, { backgroundColor }]}>
       <SafeAreaView>
         <StatusBar translucent backgroundColor={backgroundColor} {...props} />
@@ -38,16 +41,19 @@ export default function RootLayout() {
   );
 
   return (
-    <>
-      { Platform.OS !== 'ios' && <StatusBar barStyle="light-content" backgroundColor={'#A4243B'}/>}
-      { Platform.OS === 'ios' && <MyStatusBar backgroundColor="#A4243B" barStyle="light-content" />}
-      <Stack>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(public)" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      {/* <StatusBar style="auto" /> */}
+    <><ClerkProvider tokenCache={tokenCache} publishableKey={publishableKey}>
+      <ClerkLoaded>
+        {Platform.OS !== 'ios' && <StatusBar barStyle="light-content" backgroundColor={'#A4243B'} />}
+        {Platform.OS === 'ios' && <MyStatusBar backgroundColor="#A4243B" barStyle="light-content" />}
+        <Stack>
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="(public)" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        {/* <StatusBar style="auto" /> */}
+      </ClerkLoaded>
+    </ClerkProvider>
     </>
   );
 }

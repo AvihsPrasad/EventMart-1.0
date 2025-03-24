@@ -16,7 +16,7 @@ const CategoryId = () => {
     <>
         <CustomHeader title={"" + categoryid} home={false} backArrow={true} onBack={() => router.back()}/>
             {/* <Text>{JSON.stringify({listOfData}.listOfData)}</Text> */}
-        <View className='p-4 h-full'>
+        <View className='p-4 h-full pb-24'>
             <ScrollView>
                 <View className='flex bg-white p-4 mb-5 border-[1px] border-gray-300 rounded-lg'>
                     <View className='flex flex-row w-full gap-2'>
@@ -52,9 +52,9 @@ const CategoryId = () => {
                     <CustomButton title={"Search"} classname="w-full"/>
                     </View>
                 </View>
-                {categoryid === 'Event Hall' && hallList.map((datas,index) =><TouchableOpacity key={index} className='mb-2' onPress={() => router.push({pathname:'/(public)/product/[productId]',params:{productId: datas.Id}})}><ListCard DataList={datas} /></TouchableOpacity>)}
+                {categoryid === 'Venues' && hallList.map((datas,index) =><TouchableOpacity key={index} className='mb-2' onPress={() => router.push({pathname:'/(public)/product/[productId]',params:{productId: datas.Id}})}><ListCard DataList={datas} /></TouchableOpacity>)}
                 {categoryid === 'Props' && propsList.map((datas,index) =><TouchableOpacity key={index} className='mb-2' onPress={() => router.push({pathname:'/(public)/product/[productId]',params:{productId: datas.Id}})}><ListCard DataList={datas} /></TouchableOpacity>)}
-                {categoryid === 'Photos & Videos' && cameraList.map((datas,index) =><TouchableOpacity key={index} className='mb-2' onPress={() => router.push({pathname:'/(public)/product/[productId]',params:{productId: datas.Id}})}><ListCard DataList={datas} /></TouchableOpacity>)}
+                {categoryid === 'Photography' && cameraList.map((datas,index) =><TouchableOpacity key={index} className='mb-2' onPress={() => router.push({pathname:'/(public)/product/[productId]',params:{productId: datas.Id}})}><ListCard DataList={datas} /></TouchableOpacity>)}
                 {categoryid === 'Decorations' && decorationList.map((datas,index) =><TouchableOpacity key={index} className='mb-2' onPress={() => router.push({pathname:'/(public)/product/[productId]',params:{productId: datas.Id}})}><ListCard DataList={datas} /></TouchableOpacity>)}
                 {categoryid === 'Music & DJ' && musicList.map((datas,index) =><TouchableOpacity key={index} className='mb-2' onPress={() => router.push({pathname:'/(public)/product/[productId]',params:{productId: datas.Id}})}><ListCard DataList={datas} /></TouchableOpacity>)}
                 {categoryid === 'MUA' && muaList.map((datas,index) =><TouchableOpacity key={index} className='mb-2' onPress={() => router.push({pathname:'/(public)/product/[productId]',params:{productId: datas.Id}})}><ListCard DataList={datas} /></TouchableOpacity>)}
