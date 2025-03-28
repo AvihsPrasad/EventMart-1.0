@@ -30,7 +30,7 @@ function Category() {
         <View className='flex px-5 py-5'>
           {categoriesDb?.map((item, index) => (
             <View key={index} className='flex px-5 shadow-sm bg-white mb-4'>
-              <TouchableOpacity onPress={() => router.push({ pathname: '/(public)/category/[categoryid]', params: { categoryid: item.title } })} className={index % 2 ? 'flex flex-row' : 'flex flex-row-reverse'}>
+              <TouchableOpacity onPress={() => router.push({ pathname: '/(public)/category/[categoryid]', params: { categoryid: item.id } })} className={index % 2 ? 'flex flex-row' : 'flex flex-row-reverse'}>
                 <View className={`grow py-3 justify-center w-3/4 ${index % 2 ? 'pr-4' : 'pl-4'}`}>
                   <Text className='text-xl font-RobotoMedium'>{item.title}</Text>
                   <Text className='text-md font-Roboto text-gray-500 text-ellipsis overflow-hidden'>{item.descp}</Text>

@@ -22,7 +22,7 @@ const CustomHeader = ({
         {home && <View className={`grow justify-center${Platform.OS !== 'ios' ? 'pt-6':''}`}>
             <View className="flex flex-row items-center">
                     <View>
-                        <Text className="text-lg font-RobotoMedium pl-3 m-0 text-white">Hi, {user ? user : 'Shivaprasad KS'}</Text>
+                        <Text className="text-lg font-RobotoMedium pl-3 m-0 text-white capitalize">Hi, {user ? user : 'Guest'}</Text>
                         <View className="flex flex-row mt-1 pl-3">
                             <View className="mr-2"><FontAwesome6 name="location-dot" size={24} color="#EFB8C8" /></View>
                             <Text className="text-base font-Roboto m-0 text-white">{user ? user : 'location'}</Text>

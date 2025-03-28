@@ -63,7 +63,7 @@ declare interface ButtonProps extends TouchableOpacityProps {
 }
 declare interface HeaderProps extends TouchableOpacityProps {
     title?: string;
-    user?: string;
+    user?: any;
     userImage?: any;
     backArrow?: boolean;
     home?: boolean;
